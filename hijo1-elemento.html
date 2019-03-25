@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<dom-module id="hijo1-elemento">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Titulo [[titulo]]!</h2>
+    <table border="3" id="tabla">
+        <tr>
+          <td>Celda 1</td>
+          <td>Celda 2</td>
+          <td>Celda 3</td>
+        </tr>
+        <tr>
+          <td>Celda 4</td>
+          <td>Celda 5</td>
+          <td>Celda 6</td>
+        </tr>
+      </table>
+      <ul id="lista">
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ul>  
+     <paper-button on-click="tablavisible">[[boton1]]</paper-button>
+     <paper-button on-click="tablavisible">[[boton2]]</paper-button>
+    
+  </template>
+
+  <script>
+    /**
+     * `hijo1-elemento`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class Hijo1Elemento extends Polymer.Element {
+      static get is() {
+        return 'hijo1-elemento';
+      }
+      static get properties() {
+        return {
+          titulo: {
+            type: String,
+            value: 'Esto es un titulo'
+          },
+          boton1: {
+            type: String,
+            value: 'boton de lista'
+          },
+          boton2: {
+            type: String,
+            value: 'boton de tabla'
+          }
+        };
+      }
+      listavisible() {
+        const lol = this.shadowRoot.getElementById('lista').style.visibility = "hidden";
+        const listaEvent = new CustomEvent('lista', {
+          bubbles: true,
+          composed: true,
+          detail: datos
+        });
+        this.dispatchEvent(listaEvent);
+      }
+      tablavisible() {
+        // const lol =Polymer.dom(this.root).querySelector("#tabla");
+         const lol = this.shadowRoot.getElementById('tabla').style.visibility = "hidden";
+     
+        const tablaEnveht = new CustomEvent('tabla', {
+          bubbles: true,
+          composed: true,
+          detail: lol
+        });
+        this.dispatchEvent(tablaEnveht);
+      }
+    }
+
+    window.customElements.define(Hijo1Elemento.is, Hijo1Elemento);
+  </script>
+</dom-module>
